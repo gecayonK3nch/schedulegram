@@ -1,0 +1,10 @@
+^C:\USERS\GECAY\ONEDRIVE\DESKTOP\PROJECTS\BOTS\SCHEDULEGRAM\PARSER\BUILD\CMAKEFILES\3E8A1D70E29737607A126B8FD0D46068\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/parser -BC:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/parser/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/parser/build/parser.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

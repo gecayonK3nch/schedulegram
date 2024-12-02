@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_TOOLCHAIN_FILE "C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/parser/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 set(CMAKE_PREFIX_PATH "C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/parser/vcpkg/installed/x64-windows")
 
-add_executable(parser main.cpp)
+add_executable(parser main.cpp requests.cpp)
 
 find_package(cpr CONFIG REQUIRED)
 message(STATUS "CPR_DIR: ${cpr_DIR}")

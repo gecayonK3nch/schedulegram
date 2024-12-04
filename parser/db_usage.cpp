@@ -80,7 +80,8 @@ void database::clear_db() {
         return;
     }
 
-    const char* sqlDelReq = "DELETE FROM schedule;";
+    const char* sqlDelReq = "DELETE FROM schedule;"
+                            "DELETE FROM sqlite_sequence WHERE name = 'schedule'";
 
     if (sqlite3_exec(db, sqlDelReq, nullptr, nullptr, &errmsg) != SQLITE_OK) {
         std::cerr << "Table deleting error" << errmsg << std::endl;

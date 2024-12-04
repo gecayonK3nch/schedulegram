@@ -1,4 +1,5 @@
 #include "requests.hpp"
+#include "db_usage.hpp"
 #include <cpr/cpr.h>
 #include <nlohmann/json.hpp>
 
@@ -51,10 +52,7 @@ int requests::getRequest(std::string from, std::string to, std::string date) {
         nlohmann::json subtype = transport_subtype["transport_subtype"];
         std::string type = subtype["title"];
 
-        std::cout << parsing::parseTime(departure_time) << " "
-                << parsing::calculateArrivalTime(parsing::parseTime(departure_time), duration) << " "
-                << type << " "
-                << price << std::endl << std::endl;
+        database::write2db(date, parsing::parseTime(departure_time), from, parsing::calculateArrivalTime(parsing::parseTime(departure_time), duration), to, type, price);
     }
 
     return 0;

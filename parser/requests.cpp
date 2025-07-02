@@ -5,7 +5,7 @@
 
 int requests::getRequest(std::string from, std::string to, std::string date) {
 
-    std::string PathToFile = "C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/parser/params.json";
+    std::string PathToFile = "././parser/params.json";
     std::ifstream inputFile(PathToFile);
 
     if (!inputFile.is_open()) {

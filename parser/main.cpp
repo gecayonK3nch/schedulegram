@@ -1,8 +1,15 @@
 #include "requests.hpp"
 #include "db_usage.hpp"
+#include <fstream>
 
 int main(int argc, char* argv[])
 {
+    std::string PathToDb = "././database/schedule.db";
+    std::ifstream ExistsDb(PathToDb);
+    if (!ExistsDb.good()){
+        database::open_db();
+    }
+
     if (argc == 2 && std::string(argv[1]) == "clear") {
         database::clear_db();
         return 0;

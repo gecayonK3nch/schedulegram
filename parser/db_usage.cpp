@@ -4,7 +4,7 @@
 
 void database::open_db(){ 
     sqlite3* db;
-    int exit = sqlite3_open("C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/database/schedule.db", &db);
+    int exit = sqlite3_open("././database/schedule.db", &db);
 
     if (exit) {
         std::cerr << "Can't open db: " << sqlite3_errmsg(db) << std::endl;
@@ -40,7 +40,7 @@ void database::write2db(std::string date, std::string dep_time, std::string dep_
     sqlite3_stmt* stmt;
     char* errmsg = nullptr;
 
-    if (sqlite3_open("C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/database/schedule.db", &db) != SQLITE_OK) {
+    if (sqlite3_open("././database/schedule.db", &db) != SQLITE_OK) {
         std::cerr << "Can't open db: " << sqlite3_errmsg(db) << std::endl;
         return;
     }
@@ -75,7 +75,7 @@ void database::clear_db() {
     sqlite3* db;
     char* errmsg = nullptr;
 
-    if (sqlite3_open("C:/Users/gecay/OneDrive/Desktop/Projects/Bots/schedulegram/database/schedule.db", &db) != SQLITE_OK) {
+    if (sqlite3_open("././database/schedule.db", &db) != SQLITE_OK) {
         std::cerr << "Can't open db: " << sqlite3_errmsg(db) << std::endl;
         return;
     }

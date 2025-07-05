@@ -1,13 +1,18 @@
 import sqlite3
-from station_codes import stations
+import os
+from get_stations import stations
 from datetime import datetime
 
 def get_schedule(_from: str, _to: str, _date: str, show_gone: bool) -> str:
     date = datetime.strptime(_date, "%Y-%m-%d").date()
     con = sqlite3.connect("././database/schedule.db")
     cur = con.cursor()
+    sql_req = "SELECT arrival_time, departure_time, type, price FROM schedule WHERE date = ? AND departure_station = ? AND arrival_station = ?"
+
+    if not cur.execute(sql_req, (_date, _from, _to)).fetchall():
+        os.system(os.path.abspath(os.curdir) + f"/parser/build/Debug/parser.exe {_from} {_to} {_date}")
+
     if show_gone:
-        sql_req = "SELECT arrival_time, departure_time, type, price FROM schedule WHERE date = ? AND departure_station = ? AND arrival_station = ?"
         res = cur.execute(sql_req, (_date, _from, _to)).fetchall()
     else:
         sql_req = "SELECT arrival_time, departure_time, type, price FROM schedule WHERE date = ? AND departure_station = ? AND arrival_station = ? AND price != ?"
@@ -29,6 +34,3 @@ def get_schedule(_from: str, _to: str, _date: str, show_gone: bool) -> str:
     answer += '\n'.join([f"◦{row[1]:^11}|{row[0]:^10}|{row[2]:^19}|{row[3]:^6}\n" for row in res])
 
     return answer
-
-
-print(get_schedule("c2", "s9603770", "2025-07-03", True))

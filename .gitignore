@@ -3,3 +3,4 @@ build
 parser\build
 parser\.vscode
 database/schedule.db
+__pycache__

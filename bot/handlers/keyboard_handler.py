@@ -78,3 +78,19 @@ async def show_gone(callback: CallbackQuery, state: FSMContext):
             else:
                 await bot.bot.edit_message_reply_markup(chat_id=callback.from_user.id, message_id=data['main_msg'], reply_markup=await get_main_kb(state=state)) # type: ignore
     await callback.answer()
+
+
+# Обработка кнопки "🔃" для обратного пути
+@router.callback_query(F.data == "return")
+async def return_way(callback: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    await state.update_data(chosen_from=data['chosen_to'], chosen_to=data['chosen_from'])
+    data = await state.get_data()
+    date = data['chosen_date']
+    with suppress(TelegramBadRequest):
+        if all((data['chosen_from'], data['chosen_to'], data['chosen_date'])):
+            text = get_schedule(data['chosen_from'], data['chosen_to'], date.strftime("%Y-%m-%d"), data['show_gone'])
+            await bot.bot.edit_message_text(text=text, chat_id=callback.from_user.id, message_id=data['main_msg'], reply_markup=await get_main_kb(state=state)) # type: ignore
+        else:
+            await bot.bot.edit_message_reply_markup(chat_id=callback.from_user.id, message_id=data['main_msg'], reply_markup=await get_main_kb(state=state)) # type: ignore
+    await callback.answer()

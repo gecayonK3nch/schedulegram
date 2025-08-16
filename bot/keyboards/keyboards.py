@@ -33,6 +33,10 @@ async def get_main_kb(state: FSMContext):
         callback_data="show_gone"
     )
     builder.button(
+        text="🔃",
+        callback_data="return"
+    )
+    builder.button(
         text="Ввести место",
         switch_inline_query_current_chat=""
     )
